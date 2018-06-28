@@ -35,7 +35,6 @@ config={
           'node_module','dist'
         ]
       },
-      //支持图片  import
 
     ]
   },
