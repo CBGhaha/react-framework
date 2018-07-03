@@ -1,20 +1,22 @@
 import React,{Component}from 'react';
+import {BrowserRouter  as Router,Route,Link,Switch} from 'react-router-dom';
+import AsyncComponent from 'components/asyncComponent';
 import RootLayout from '../layout/rootLayout';
 import Notfind from '../pages/404';
-import Home from '../pages/home/index.js';
-import Page1 from '../pages/page1';
-import Page2 from '../pages/page2';
+const Home=AsyncComponent(()=>import('../pages/home/index.js'));
+const Page1=AsyncComponent(()=>import('../pages/page1'));
+const Page2=AsyncComponent(()=>import('../pages/page2'));
 
 const links=[
   {routerName:'HomePage',url:'/'},
   {routerName:'Page1',url:'/page1'},
   {routerName:'Page2',url:'/page2'}
 ];
-import {BrowserRouter  as Router,Route,Link,Switch} from 'react-router-dom';
 
 const Mycomponent=({component:Component,...reset})=>(
     <Route {...reset} render={()=>(<RootLayout><Component/></RootLayout>)} />
 )
+
  const myRouter=(props)=>{
     return (
       <Router>

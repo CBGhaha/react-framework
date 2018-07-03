@@ -69,6 +69,9 @@ config={
     splitChunks: {
       minChunks: 1,
       chunks:'all'
+    },
+    runtimeChunk: {
+      name: 'manifest'
     }
   },
   //插件 运用插件可以实现很多重要功能 代码压缩 自动生成html 热加载 提取公共库 等等
