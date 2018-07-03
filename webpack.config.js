@@ -1,6 +1,7 @@
 const path=require('path');
 var webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const common=require('./webpack.common.js');
 const merge = require('webpack-merge');
@@ -19,6 +20,7 @@ config={
             loader:"css-loader",//css-loader用于支持css的模块化 可以让css支持import require
             options:{minimize:true,modules:true}
           },
+          'less-loader',
           {
             loader: 'postcss-loader',//css兼容性前缀
             options: {
@@ -30,7 +32,7 @@ config={
             }
           }
           ]
-        })
+        }),
         exclude:[
           'node_module','dist'
         ]

@@ -7,7 +7,7 @@ config={
     hot:true,//启动热替换功能 局部刷新
     contentBase:'/',//启动服务器的目录 默认是当前执行目录
     host:'0.0.0.0',//启动服务器监听的域名 类似node里的listen 默认是127.0.0.1 如果希望局域网的设备访问项目可以设置成0.0.0.0
-    port:3000,//启动服务器监听的端口号
+    port:3001,//启动服务器监听的端口号
     historyApiFallback:true,//请求不同路径时返回的html true表示 任何请求路径都返回index.html 然后js再根据路径渲染界面 适合单页面应用
     //在多页面应用中 如果不同的路径希望返回不同的html 可以如下设置
     // historyApiFallback: {
@@ -38,6 +38,7 @@ config={
                     modules:true
                 }
               },
+              'less-loader',
               {
                 loader: 'postcss-loader',//css兼容性前缀
                 options: {

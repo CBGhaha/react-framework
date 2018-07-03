@@ -5,7 +5,8 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 config={
   entry:{
     main:path.resolve(__dirname,'src'),//项目的主入口
-    // vender:['react'],
+    //代码分离---提取公共库
+    // vendor:['react','react-router-dom','react-dom',],
   },
   output:{
 
@@ -13,10 +14,10 @@ config={
     // path:path.resolve(__dirname,'[hash]'), //cdn地址文件夹名字是hash变化的
     // publicPath:'http://www.cdn.com/mycdn/[hash]/',
 
-    filename:"[name].[chunckhash].js",
+    filename:"[name].[hash].js",
     path:path.resolve(__dirname,'dist'),
     publicPath:'/',
-    chunkFilename:"[name].[chuckhash:8].js",//在entry中未定义的js 一般是动态按需加载时的js
+    chunkFilename:"[name].[chunkhash:8].js",//在entry中未定义的js 一般是动态按需加载时的js
     crossOriginLoading:'anonymous',//设置跨域js crossorigin的值（主要用于获取跨域js的报错信息）
 
   },
@@ -63,6 +64,13 @@ config={
 
 
   },
+  //代码分离---
+  optimization: {
+    splitChunks: {
+      minChunks: 1,
+      chunks:'all'
+    }
+  },
   //插件 运用插件可以实现很多重要功能 代码压缩 自动生成html 热加载 提取公共库 等等
   plugins:[
     //自动生成html模板
@@ -70,7 +78,6 @@ config={
         filename: 'index.html',//生成的html模板的名称
         template: path.join(__dirname, 'src/index.html')//生成的html的模板的
     }),
-
   ],
 
   //项目的类型 默认是web项目

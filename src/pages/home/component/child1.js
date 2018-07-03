@@ -1,12 +1,13 @@
 import React,{Component} from 'react';
 import context from 'components/context';
 const {Consumer}=context;
-//react 的context上下文 
+
 export default class Child1 extends Component{
   constructor(props){
     super(props);
   }
   render(){
+    console.log(this.props.publicProps)
     return(
       <div>
           <Consumer>
