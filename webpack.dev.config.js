@@ -1,8 +1,7 @@
-const path=require('path');
 var webpack = require('webpack');
 const common=require('./webpack.common.js');
 const merge = require('webpack-merge');
-config={
+const config={
   devServer:{
     hot:true,//启动热替换功能 局部刷新
     contentBase:'/',//启动服务器的目录 默认是当前执行目录

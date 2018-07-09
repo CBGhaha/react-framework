@@ -1,8 +1,6 @@
 const path=require('path');
-var webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-config={
+const config={
   entry:{
     main:path.resolve(__dirname,'src'),//项目的主入口
     //代码分离---提取公共库
@@ -35,8 +33,8 @@ config={
       },
       //支持图片  import
       {
-		    test: /\.(png|jsp|gif)/,
-		    use:[
+        test: /\.(png|jsp|gif)/,
+        use:[
           {
             loader: 'url-loader',
             options:{

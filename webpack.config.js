@@ -1,11 +1,9 @@
-const path=require('path');
 var webpack = require('webpack');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const common=require('./webpack.common.js')
 const merge = require('webpack-merge')
-config={
+const config={
   //配置模块的读取和解析规则
   module:{
     rules:[
@@ -57,9 +55,9 @@ config={
        'process.env.NODE_ENV': JSON.stringify('production')
      }),
      new MiniCssExtractPlugin({
-   　　filename: "[name].[chunkhash:8].css",
-  　　 chunkFilename: "[id].css"
-　　 })
+       filename: "[name].[chunkhash:8].css",
+       chunkFilename: "[id].css"
+     })
   ],
 
   //代码调试映射模式 (map文件) 用于追踪调试报错和源码位置
