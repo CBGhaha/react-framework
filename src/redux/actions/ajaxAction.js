@@ -9,6 +9,7 @@ export default function ajaxAction(method,parms,callback){
     payload:{
       promise:promise,
       callback:callback
+      
     }
 
   }
