@@ -3,9 +3,11 @@ import Child1 from './component/child1.js';
 import Child2 from './component/child2.js';
 import {Route} from 'react-router-dom';
 import store from '../../redux/store.js';
-let { subscribe, dispatch, getState }=store;
 import action from '../../redux/actions/common.js';
+let { dispatch, getState }=store;
+import ajaxAction from '../../redux/actions/ajaxAction.js';
 dispatch(action('data1',{name:'bang'}));
+dispatch(ajaxAction('page1Ajax'))
 console.log(getState());
 
 export default class Page1 extends Component{
