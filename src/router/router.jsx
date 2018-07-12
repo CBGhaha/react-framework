@@ -13,7 +13,8 @@ const links=[
   {routerName:'Page2',url:'/page2'}
 ];
 
-const Mycomponent=({component:Component,...reset})=>(
+//
+const LayoutComponent=({component:Component,...reset})=>(
     <Route {...reset} render={()=>(<RootLayout><Component/></RootLayout>)} />
 )
 
@@ -31,7 +32,7 @@ const Mycomponent=({component:Component,...reset})=>(
           <Switch>
               <Route path="/page1" component={Page1}></Route>
               <Route exact path="/page2" component={Page2}></Route>
-              <Mycomponent exact path="/" component={Home}/>
+              <LayoutComponent exact path="/" component={Home}/>
               <Route component={Notfind}></Route>
           </Switch>
         </div>
