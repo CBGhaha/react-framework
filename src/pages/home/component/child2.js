@@ -4,7 +4,6 @@ export default class Child2 extends Component{
     super(props);
   }
   render(){
-    console.log(this.props.publicProps)
     return(
       <div>
         homeChild2
