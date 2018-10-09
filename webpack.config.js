@@ -5,6 +5,7 @@ const common=require('./webpack.common.js')
 const merge = require('webpack-merge')
 const config={
   //配置模块的读取和解析规则
+  mode:'production',
   module:{
     rules:[
       //css/less文件打包 并单独编译成文件 不插入在bundle中
