@@ -23,7 +23,7 @@ const config={
 
   },
   //代码调试映射模式 (map文件) 用于追踪调试报错和源码位置
-  devtool:'eval-source-map', //---开发环境适合
+  // devtool:'eval-source-map', //---开发环境适合
   module: {
         rules: [
           //编译css/less文件

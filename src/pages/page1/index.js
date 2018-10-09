@@ -13,7 +13,7 @@ export default class Page1 extends Component{
         page1
         <ul>
           <li><Link to='/page1/child1'>child1</Link></li>
-          <li><Link to='/page1/child2'>child1</Link></li>
+          <li><Link to='/page1/child2'>child2</Link></li>
         </ul>
         <div>
             <Route path="/page1/child1" component={Child1}></Route>
