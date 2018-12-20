@@ -5,13 +5,18 @@
 const express = require('express');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
-
+const webpackHotMiddleware = require("webpack-hot-middleware");
 const app = express();
-const config = require('./webpack.dev.config.js');
+const config = require('./webpack.dev.server.config.js');
 const compiler = webpack(config);
 const instance = webpackDevMiddleware(compiler);
-
+let hotMiddleware = webpackHotMiddleware(compiler,{
+   log: false,
+   path: '/__webpack_hmr',
+   heartbeat: 2000,
+})
 app.use(instance);
+app.use(hotMiddleware);
 instance.waitUntilValid(() => {
   console.log('请打开localhost:3001!\n');
 });
