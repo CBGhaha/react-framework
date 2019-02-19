@@ -1,6 +1,7 @@
 //webpack-dev-server 是express+webpack-dev-middleware 两者区别是webpack-dev-server是封装好的 除了webpack.config.js配置 很难做定制化的设置
 //webpack-dev-middleware 可以手动配置服务 整合自己的后端服务
 
+//但webpack-dev-middleware 并未实现webpack-dev-server的模块热替换功能 所以需要额外引入webpack-hot-middleware
 
 const express = require('express');
 const webpack = require('webpack');
