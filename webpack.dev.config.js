@@ -50,9 +50,7 @@ const config={
                 }
               }
             ],
-            exclude:[
-              'node_module','dist'
-            ]
+            exclude:/node_module|dist/
           },
         ]
 
