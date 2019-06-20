@@ -3,23 +3,39 @@
 
 //但webpack-dev-middleware 并未实现webpack-dev-server的模块热替换功能 所以需要额外引入webpack-hot-middleware
 
-const express = require('express');
-const webpack = require('webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require("webpack-hot-middleware");
-const app = express();
-const config = require('./webpack.dev.server.config.js');
-const compiler = webpack(config);
-const instance = webpackDevMiddleware(compiler);
-let hotMiddleware = webpackHotMiddleware(compiler,{
-   log: false,
-   path: '/__webpack_hmr',
-   heartbeat: 2000,
-})
-app.use(instance);
-app.use(hotMiddleware);
-instance.waitUntilValid(() => {
-  console.log('请打开localhost:3001!\n');
-});
+const express = require('express')
+const path = require('path')
+const webpack = require('webpack')
+const webpackDevMiddleware = require('webpack-dev-middleware')
+const webpackHotMiddleware = require('webpack-hot-middleware')
+const app = express()
+const config = require('./webpack.dev.server.config.js')
+const compiler = webpack(config)
+const instance = webpackDevMiddleware(compiler)
 
-app.listen(3001);
+app.use(instance)
+
+let hotMiddleware = webpackHotMiddleware(compiler, {
+  log: false,
+  path: '/__webpack_hmr',
+  heartbeat: 2000
+})
+app.use(hotMiddleware)
+// 设置webpack启动后的项目 单页面路由
+app.use('*', (req, res, next) => {
+  const filename = path.join(__dirname, `dist/index.html`)
+  compiler.outputFileSystem.readFile(filename, (err, result) => {
+    if (err) {
+      return next(err)
+    }
+    res.set('content-type', 'text/html')
+    res.send(result)
+    res.end()
+  })
+})
+instance.waitUntilValid(() => {
+  console.log('请打开localhost:3001!\n')
+})
+
+app.listen(3001)
+
