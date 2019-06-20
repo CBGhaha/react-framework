@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --config webpack.dev.config.js --devtool eval --progress --colors",
-    "build": "webpack --config webpack.config.js --progress --colors"
+    "build": "webpack --config webpack.config.js --progress --colors",
+    "server":"node server.js"
   },
   "author": "",
   "license": "ISC",
