@@ -1,49 +1,69 @@
+/**
+ * react16中会默认加上key
+ * 如果你未设置key，在render中react会默认为你加上key值
+ * 比如 {ishow&&<div></div>} 和 <div><div> 就算前后render后他们的遍历索引（结构位置）是对应的
+ * react也会判断这是一个删除重新插入的操作 因为他们的key值不等 {ishow&&<div></div>}的挂载和卸载
+ * 都是它自己的删除和新增 不能被认为是其他节点的变化 去无效diff 因为他们的结构大概率是不一致的
+ * 而且也影响了后续一系列的比对
+ */
 import React, { Component } from 'react'
-import context from '../../components/context.js'
-import Child1 from './component/child1'
-const { Consumer, Provider } = context
-import { connect } from 'react-redux'
-import { increaseCount } from '../../redux/actions/homeActions'
-//react 的context上下文 上下文用于将一些全局的状态作用于全部子组件 (redux的store)
-//Provider 的value属性值会改变 在其内部 Consumer createContext（‘value’）时定义的value 而其外部不会受改变
-@connect(
-  store => ({
-    count: store.count
-  }),
-  {
-    increaseCount
-  }
-)
+window.div4_1 = ''
+window.div4_2 = ''
 export default class Home extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      isshow: true
+    }
   }
-  componentDidMount() {}
+  componentWillMount() {
+    this.setState(
+      {
+        isshow: false
+      },
+      () => {
+        console.log('state down')
+      }
+    )
+    console.log(this.state.isshow)
+  }
+  componentDidMount() {
+    const ele = document.getElementsByClassName('div4')[0]
+    window.div4_1 = ele
+  }
+  componentDidUpdate() {
+    console.log(document.getElementsByClassName('div4')[0] === window.div4_1)
+    console.log(document.getElementsByClassName('div4')[3] === window.div4_1)
+    const ele = document.getElementsByClassName('div4')[0]
+    window.div4_2 = ele
+  }
   addCount = () => {
     const { count } = this.props
     this.props.increaseCount(count.data + 1)
   }
+  click = () => {
+    this.setState({
+      isshow: false
+    })
+  }
   render() {
-    const { count } = this.props
+    const { isshow } = this.state
     return (
       <div>
-        <p>一个关于react上下文context的例子</p>
-        <Provider value="red">
-          <Consumer>
-            {theme => <div style={{ color: theme }}>child</div>}
-          </Consumer>
-          <Child1 />
-        </Provider>
-        <Child1 />
+        <div>1</div>
+        <div>2</div>
+        {!isshow && <div className="div4">4</div>}
+        {!isshow && <div className="div4">4</div>}
+        {!isshow && <div className="div4">4</div>}
+        {isshow ? (
+          <div className="div4">4</div>
+        ) : (
+          <div className="div4">4.1</div>
+        )}
+        {!isshow && <div className="div4">4</div>}
 
-        <div>______________________redux example_________________________</div>
-        <div>count={count.data}</div>
-        <button
-          onClick={this.addCount}
-          style={{ padding: '5px 10px', border: '1px solid #666' }}
-        >
-          +
-        </button>
+        <div>5</div>
+        <div onClick={this.click}>click</div>
       </div>
     )
   }
