@@ -21,6 +21,7 @@ let hotMiddleware = webpackHotMiddleware(compiler, {
   heartbeat: 2000
 })
 app.use(hotMiddleware)
+// 设置webpack启动后的项目 单页面路由
 app.use('*', (req, res, next) => {
   const filename = path.join(__dirname, `dist/index.html`)
   compiler.outputFileSystem.readFile(filename, (err, result) => {
@@ -33,7 +34,8 @@ app.use('*', (req, res, next) => {
   })
 })
 instance.waitUntilValid(() => {
-  console.log('\n\n\n请打开localhost:3001!\n')
+  console.log('请打开localhost:3001!\n')
 })
 
 app.listen(3001)
+
