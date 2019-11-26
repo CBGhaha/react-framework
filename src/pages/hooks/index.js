@@ -1,6 +1,10 @@
 import React from 'react';
 import MyuseState from './useState';
-import UseCallbackAnduseMemo from './useCallbackAnduseMemo'
+import UseCallbackAnduseMemo from './useCallbackAnduseMemo';
+import MyUseReducer from './useReducer';
+import MyuseContext from './useContext';
+import MyuseEffect from  './useEffect';
+import MyuseRef from './useRef';
 import styles from  './index.less'
 
 export default function Hooks(){
@@ -12,6 +16,18 @@ export default function Hooks(){
       </div>
       <div className={styles["content-part"]}>
         <UseCallbackAnduseMemo/>
+      </div>
+      <div className={styles["content-part"]}>
+        <MyUseReducer/>
+      </div>
+      <div className={styles["content-part"]}>
+        <MyuseContext/>
+      </div>
+      <div className={styles["content-part"]}>
+        <MyuseEffect/>
+      </div>
+      <div className={styles["content-part"]}>
+        <MyuseRef/>
       </div>
     </div>
     )
