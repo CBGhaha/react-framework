@@ -58,7 +58,7 @@
     "antd": "4.7.2",
     "antd-colorful": "0.0.2",
     "antd-input": "0.0.4",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
     "babel-plugin-import": "^1.13.0",
