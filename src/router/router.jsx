@@ -1,17 +1,17 @@
-import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-import AsyncComponent from 'components/asyncComponent'
-import Notfind from '../pages/404'
-const Home = AsyncComponent(() => import('../pages/home/index.js'))
-const Page1 = AsyncComponent(() => import('../pages/page1'))
-const Page2 = AsyncComponent(() => import('../pages/page2'))
-const Hooks = AsyncComponent(() => import('../pages/hooks'))
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import asyncComponent from 'components/asyncComponent';
+import Notfind from '../pages/404';
+const Home = asyncComponent(() => import('../pages/home/index.js'));
+const Page1 = asyncComponent(() => import('../pages/page1'));
+const Page2 = asyncComponent(() => import('../pages/page2'));
+const Hooks = asyncComponent(() => import('../pages/hooks'));
 const links = [
   { routerName: 'HomePage', url: '/' },
   { routerName: 'Page1', url: '/page1' },
   { routerName: 'Page2', url: '/page2' },
   { routerName: 'Hooks', url: '/hooks' }
-]
+];
 
 const myRouter = props => {
   return (
@@ -33,6 +33,6 @@ const myRouter = props => {
         </Switch>
       </div>
     </Router>
-  )
-}
-export default myRouter
+  );
+};
+export default myRouter;

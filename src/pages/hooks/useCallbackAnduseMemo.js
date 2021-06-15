@@ -1,14 +1,14 @@
-import React,{useState,useCallback,useMemo} from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 
-export default function UseCallbackAnduseMemo(){
-  const [count,setCount]=useState(0);
-  const [times,setTimes]=useState(0);
-  const countMemo=useMemo(()=>{
+export default function UseCallbackAnduseMemo() {
+  const [count, setCount] = useState(0);
+  const [times, setTimes] = useState(0);
+  const countMemo = useMemo(()=>{
     console.log('count is add');
-    return 'aaa'+times
-  },[count]);
+    return 'aaa' + times;
+  }, [count]);
   //useCallback(fn, deps) 相当于 useMemo(() => fn, deps)。适合返回一个函数组件的场景
-  return(
+  return (
     <div>
       <h4>countMemo</h4>
       当deps数组中的依赖项改变后，执行useMemo中回调函数的代码，
@@ -18,11 +18,11 @@ export default function UseCallbackAnduseMemo(){
       <p>count:<span>{count}</span></p>
       <p>times:<span>{times}</span></p>
       <div>
-        <button onClick={()=>setCount(count+1)}>addCount</button>
-        <button onClick={()=>setTimes(times+1)}>addtime</button>
+        <button onClick={()=>setCount(count + 1)}>addCount</button>
+        <button onClick={()=>setTimes(times + 1)}>addtime</button>
       </div>
       {countMemo}
     </div>
-  )
+  );
 
 }

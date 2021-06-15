@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 
 /**
  *  1：useState、useEffect都是reatc的Hook
@@ -10,42 +10,44 @@ import React, { useState, useEffect } from 'react'
  *
  */
 
-let ccc = 0
+let ccc = 0;
 export default function Child1() {
   // Declare a new state variable, which we'll call "count"
 
   if (ccc < 2) {
-    var [count, setCount] = useState(100)
-    var [num, setNum] = useState(0)
+    var [count, setCount] = useState(100);
+    var [num, setNum] = useState(0);
   } else {
-    var [num, setNum] = useState(0)
-    var [count, setCount] = useState(100)
+    // eslint-disable-next-line no-redeclare
+    var [num, setNum] = useState(0);
+    // eslint-disable-next-line no-redeclare
+    var [count, setCount] = useState(100);
   }
-  ccc++
+  ccc++;
   if (count > 2) {
     useEffect((a, b) => {
-      console.log('useEffect1', a, b)
-    })
+      console.log('useEffect1', a, b);
+    });
   } else {
     useEffect((a, b) => {
-      console.log('useEffect2', a, b)
-    })
+      console.log('useEffect2', a, b);
+    });
   }
 
   useEffect((a, b) => {
-    console.log(22222222222)
-  })
+    console.log(22222222222);
+  });
   return (
     <div>
       <p>You clicked {count} times</p>
       <p>{num}</p>
       <button
         onClick={() => {
-          setCount(count + 1)
+          setCount(count + 1);
         }}
       >
         Click me
       </button>
     </div>
-  )
+  );
 }

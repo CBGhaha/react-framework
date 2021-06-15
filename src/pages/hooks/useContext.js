@@ -1,7 +1,7 @@
-import React ,{useContext,useState} from 'react';
-const Mycontext=React.createContext();
-export default function MyuseContext(){
-  const [count,setCount]=useState(0);
+import React, { useContext, useState } from 'react';
+const Mycontext = React.createContext();
+export default function MyuseContext() {
+  const [count, setCount] = useState(0);
   return <Mycontext.Provider value={count}>
     <div>
       <h4>useContext</h4>
@@ -9,12 +9,12 @@ export default function MyuseContext(){
       <Child/>
       <p>useContext</p>
       <UseContextChild/>
-      <button onClick={()=>setCount(count+1)}>count add</button>
+      <button onClick={()=>setCount(count + 1)}>count add</button>
     </div>
-  </Mycontext.Provider>
+  </Mycontext.Provider>;
 }
-function Child(){
-  return(
+function Child() {
+  return (
     <Mycontext.Consumer>
       {
         value=>(
@@ -22,11 +22,11 @@ function Child(){
         )
       }
     </Mycontext.Consumer>
-  )
+  );
 }
-function UseContextChild(){
+function UseContextChild() {
   const value = useContext(Mycontext);
   return <div>
     {value}
-  </div>
+  </div>;
 }

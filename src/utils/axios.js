@@ -1,9 +1,9 @@
 import axios from 'axios';
-export default function ajaxAxios(url,params={},method){
+export default function ajaxAxios(url, params = {}, method) {
   return axios({
-    method:method.toLocaleUpperCase(),
-    url:url,
-    params:params
-    
-  })
+    method: method.toLocaleUpperCase(),
+    url: url,
+    params: params
+
+  });
 }

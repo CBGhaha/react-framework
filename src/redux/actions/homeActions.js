@@ -1,4 +1,4 @@
-import common from './common.js'
+import common from './common.js';
 export function increaseCount(count) {
-  return common('count', count)
+  return common('count', count);
 }

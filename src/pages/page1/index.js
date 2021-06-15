@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import Child1 from './component/child1.js'
-import Child2 from './component/child2.js'
-import { Route, Link } from 'react-router-dom'
+import React, { Component } from 'react';
+import Child1 from './component/child1.js';
+import Child2 from './component/child2.js';
+import { Route, Link } from 'react-router-dom';
 export default class Page1 extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render() {
@@ -13,6 +13,6 @@ export default class Page1 extends Component {
         page1
         <Child1 />
       </div>
-    )
+    );
   }
 }

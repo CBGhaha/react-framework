@@ -1,31 +1,31 @@
-import React ,{useState} from 'react';
-export default function  MyUseState(){
-  const [times,setTimes]=useState(0);
+import React, { useState } from 'react';
+export default function MyUseState() {
+  const [times, setTimes] = useState(0);
   // 每次更新都是重新执行函数 有自己单独的作用域环境
-  let logTimesAsync=()=>{
+  let logTimesAsync = ()=>{
     setTimeout(()=>{
-      console.log(times)
-    },3000)
-  }
+      console.log(times);
+    }, 3000);
+  };
 
-  const updateTimesAsync=()=>{
+  const updateTimesAsync = ()=>{
     setTimeout(()=>{
-      setTimes(times+1)
-    },3000)
-  }
+      setTimes(times + 1);
+    }, 3000);
+  };
 
-  const updateTimesAsyncByFun=()=>{
+  const updateTimesAsyncByFun = ()=>{
     setTimeout(()=>{
-      setTimes((times)=>times+1)
-    },3000)
-  }
+      setTimes((times)=>times + 1);
+    }, 3000);
+  };
 
-  return(
+  return (
     <div>
       <div>
         简单的useState
         <p>you has clicked {times}</p>
-        <span onClick={()=>setTimes(times+1)}>click</span>
+        <span onClick={()=>setTimes(times + 1)}>click</span>
         <p>__________________________________________________________________________________________</p>
       </div>
       <div>
@@ -43,5 +43,5 @@ export default function  MyUseState(){
       <button onClick={logTimesAsync}>asyncLog</button>
 
     </div>
-    )
+  );
 }

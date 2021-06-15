@@ -26,7 +26,8 @@ const config={
         use:[
           {
             loader:'babel-loader',
-          }
+          },
+          'eslint-loader'
         ],
         exclude:path.resolve(__dirname,'node_module')
       },
