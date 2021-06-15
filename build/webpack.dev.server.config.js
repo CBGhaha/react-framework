@@ -1,7 +1,8 @@
 var webpack = require('webpack')
 const common = require('./webpack.common.js')
 const merge = require('webpack-merge')
-const path = require('path')
+const path = require('path');
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 common.entry.main.splice(
   1,
   0,
@@ -40,7 +41,18 @@ const config = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin() //HMR 模块热替换
+    new webpack.HotModuleReplacementPlugin(), //HMR 模块热替换
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+    }),
+    new webpack.DllReferencePlugin({
+      manifest: require('../dll/react.manifest.json')
+    }),
+    new webpack.DllReferencePlugin({
+      manifest: require('../dll/lib.manifest.json')
+    }),
+    // 插入动态链接库
+    new AddAssetHtmlPlugin({ filepath: path.resolve(__dirname, '../dll', '*.dll.js') })
   ]
 }
 module.exports = merge(common, config)

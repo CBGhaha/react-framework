@@ -1,10 +1,9 @@
 const path=require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 const config={
   entry:{
-    main:["babel-polyfill",path.resolve(__dirname,'src')],//项目的主入口
-    //代码分离---提取公共库
-    // vendor:['react','react-router-dom','react-dom',],
+    main: path.resolve(__dirname,'../src'), //项目的主入口
   },
   output:{
 
@@ -12,9 +11,9 @@ const config={
     // path:path.resolve(__dirname,'[hash]'), //cdn地址文件夹名字是hash变化的
     // publicPath:'http://www.cdn.com/mycdn/[hash]/',
 
-    filename:"[name].[hash].js",
-    path:path.resolve(__dirname,'dist'),
-    publicPath:'/',
+    filename: "[name].[hash].js",
+    path: path.resolve(__dirname,'dist'),
+    publicPath: '/',
     chunkFilename:"[name].[chunkhash:8].js",//在entry中未定义的js 一般是动态按需加载时的js
     crossOriginLoading:'anonymous',//设置跨域js crossorigin的值（主要用于获取跨域js的报错信息）
 
@@ -30,6 +29,12 @@ const config={
           }
         ],
         exclude:path.resolve(__dirname,'node_module')
+      },
+      // 处理typescript
+      {
+        test: /\.(ts|tsx)$/,
+        use: ['babel-loader', 'awesome-typescript-loader'],
+        exclude: path.resolve(__dirname, './node_module')
       },
       //支持图片  import
       {
@@ -52,7 +57,7 @@ const config={
   resolve:{
     //设置文件夹别名
     alias:{
-        components:path.resolve(__dirname,'src/components'),//匹配路径components
+        components:path.resolve(__dirname,'../src/components'),//匹配路径components
         // 'utils$':'./src/utils',//配置以utils为结尾的路径
     },
     //设置模块引入时可以省略的后缀名
@@ -63,11 +68,41 @@ const config={
 
   },
   //代码分离---
-  optimization: {
+    optimization: {
     splitChunks: {
-      minChunks: 1,
-      chunks:'all'
+      chunks: 'all', //将什么类型的代码块用于分割，三选一： "initial"：入口代码块 | "all"：全部 | "async"：按需加载的代码块
+      minSize: 0, //大小超过30kb的模块才会被提取
+      minChunks: 1, //某个模块至少被多少代码块引用，才会被提取成新的chunk
+      maxAsyncRequests: 5, //分割后，按需加载的代码块最多允许的并行请求数，在webpack5里默认值变为6
+      maxInitialRequests: 3, //分割后，入口代码块最多允许的并行请求数，在webpack5里默认值变为4
+      automaticNameDelimiter: '~', //代码块命名分割符
+      cacheGroups: {
+        package: {
+          name: true,
+          chunks: 'all',
+          minChunks: 2,
+          maxSize: 1014 * 1024 * 4,
+          priority: 3,
+          test: (module) => {
+            return /[\\/]node_modules[\\/]/.test(module.context);
+          }
+        },
+        async: {
+          chunks: 'async', 
+          minSize: 0,
+          name: true, // 按 chunk1~chunk2~chunk2~async命名 为false直接用数字id  为srting
+          priority: 2
+        },
+        default: {
+          chunks: 'all',
+          minSize: 0,
+          name: true,
+          priority: 1
+        }
+      }
+
     },
+    // 提取webpack运行时的代码
     runtimeChunk: {
       name: 'manifest'
     }
@@ -77,8 +112,13 @@ const config={
     //自动生成html模板
     new HtmlWebpackPlugin({
         filename: 'index.html',//生成的html模板的名称
-        template: path.join(__dirname, 'src/index.html')//生成的html的模板的
+        template: path.join(__dirname, '../src/index.html')//生成的html的模板的
     }),
+    new Dotenv(
+      {
+        path: path.join(__dirname, `../env/.env.${process.env.BUILD_ENV}`)
+      }
+    ),
   ],
 
   //项目的类型 默认是web项目

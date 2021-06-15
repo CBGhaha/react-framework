@@ -1,6 +1,8 @@
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
 const common=require('./webpack.common.js');
 const merge = require('webpack-merge');
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const config={
   mode:'development',
   devServer:{
@@ -57,6 +59,17 @@ const config={
     },
     plugins:[
       new webpack.HotModuleReplacementPlugin(),//HMR 模块热替换
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify('development')
+      }),
+      new webpack.DllReferencePlugin({
+        manifest: require('../dll/react.manifest.json')
+      }),
+      new webpack.DllReferencePlugin({
+        manifest: require('../dll/lib.manifest.json')
+      }),
+      // 插入动态链接库
+      new AddAssetHtmlPlugin({ filepath: path.resolve(__dirname, '../dll', '*.dll.js') })
 
     ],
 }
